@@ -49,3 +49,11 @@ jobs:
         file: ./Dockerfiles/test.Dockerfile  
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/srisakul-sawinee-intro-to-devops-a2:test-latest
+
+    - name: Build and push user image to Docker Hub
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: Dockerfiles/user.Dockerfile
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/srisakul-sawinee-intro-to-devops-a2:user-latest

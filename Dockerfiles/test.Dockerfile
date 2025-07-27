@@ -4,6 +4,9 @@ COPY package.json package-lock.json ./
 
 RUN npm install
 
-COPY ./ ./
+COPY src/ ./src/
+COPY tests/ ./tests/
+COPY jest.config.mjs ./
+COPY eslint.config.mjs ./
 
 CMD [ "npm", "test" ]
