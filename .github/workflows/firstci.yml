@@ -29,6 +29,23 @@ jobs:
       uses: ataylorme/eslint-annotate-action@v3
       with:
         only-pr-files: false
-        
+
     - name: Run Jest Tests
       run: npm test
+
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Build and push test image to Docker Hub
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./Dockerfiles/test.Dockerfile  
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/srisakul-sawinee-intro-to-devops-a2:test-latest
